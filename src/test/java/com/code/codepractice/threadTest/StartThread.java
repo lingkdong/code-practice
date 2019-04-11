@@ -2,6 +2,9 @@ package com.code.codepractice.threadTest;
 
 import org.junit.Test;
 
+import static com.code.codepractice.threadTest.ThreadUtils.*;
+
+
 /**
  * @Author: dongxin
  * @Date: 2019/4/10 16:06
@@ -25,7 +28,7 @@ public class StartThread {
         Thread thread4=new Thread(new ThreadByExtends());
         thread4.start();
         // 延迟 test 结束
-        Thread.sleep(2000);
+        delayEnd();
     }
 
     @Test
@@ -47,11 +50,7 @@ public class StartThread {
         thread.start();
 
         // 延迟 test 结束
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        delayEnd();
     }
 }
 //1.通过extends Thread

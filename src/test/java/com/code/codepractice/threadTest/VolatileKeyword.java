@@ -2,6 +2,8 @@ package com.code.codepractice.threadTest;
 
 import org.junit.Test;
 
+import static com.code.codepractice.threadTest.ThreadUtils.delayEnd;
+
 
 /**
  * @Author: dongxin
@@ -46,10 +48,6 @@ public class VolatileKeyword {
         processor.shutdown();
 
         // 延迟 test 结束
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        delayEnd();
     }
 }

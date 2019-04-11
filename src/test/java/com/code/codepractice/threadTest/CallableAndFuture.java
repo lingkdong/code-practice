@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.Random;
 import java.util.concurrent.*;
 
+import static com.code.codepractice.threadTest.ThreadUtils.delayEnd;
+
 /**
  * @Author: dongxin
  * @Date: 2019/4/10 14:37
@@ -54,6 +56,8 @@ public class CallableAndFuture {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        //延迟 test结束
+        delayEnd();
 
     }
 
