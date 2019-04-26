@@ -12,7 +12,7 @@ import static com.code.codepractice.threadTest.ThreadUtils.delayEnd;
  * reads a field will see the most recently written value  - Josh Bloch(Java 集合框架创办人)
  * https://en.wikipedia.org/wiki/Joshua_Bloch
  **/
-public class VolatileKeyword {
+public class VolatileKeyword2 {
 
     class Processor extends Thread{
         //volatile 具有可见性 但不具备原子性

@@ -12,7 +12,7 @@ import static com.code.codepractice.threadTest.ThreadUtils.*;
  * {@link  java.lang.Runnable}
  * {@link  java.lang.Thread}//thread 也是 implement Runnable
  **/
-public class StartThread {
+public class StartThread1 {
 
     @Test
     public void test() throws InterruptedException {

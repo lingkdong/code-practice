@@ -13,7 +13,7 @@ import java.util.Random;
  * 定义两个不同对象锁，可以交替执行 一个线程执行 stageOne 其他线程可执行 stageTwo
  * 同一对象 两个同步方法不可交替执行，一次只能执行一个{@link com.code.codepractice.threadTest.SynchronizedLockMethod}
  **/
-public class SynchronizedLockObject {
+public class SynchronizedLockObject4 {
 
     private Random random = new Random();
     //定义两个共享变量

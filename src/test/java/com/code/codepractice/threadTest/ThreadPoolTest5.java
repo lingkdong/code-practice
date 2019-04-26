@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
  * @Date: 2019/4/11 17:02
  * 线程池
  **/
-public class ThreadPoolTest {
+public class ThreadPoolTest5 {
     @Test
     public void test(){
         ExecutorService executor= Executors.newFixedThreadPool(2);//固定大小线程池

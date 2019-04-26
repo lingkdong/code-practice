@@ -1,6 +1,11 @@
 package com.code.codepractice;
 
+import com.alibaba.fastjson.JSON;
+import org.json.JSONObject;
 import org.junit.Test;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @Author: dongxin
@@ -106,5 +111,38 @@ public class ProgramTest {
     @Test
     public void testStringFormat(){
         System.out.println(String.format("this is test %s,%s","format",1));
+    }
+
+    @Test
+    public void testJson(){
+        List<Top> tops= Arrays.asList(
+                Top.newTop()
+                .amount(479.99D)
+                .orderNo("8180723100966900")
+                .build(), Top.newTop()
+                .amount(779.99D)
+                .orderNo("8180723100966902")
+                .build(), Top.newTop()
+                .amount(79.99D)
+                .orderNo("8180723100966903")
+                .build(), Top.newTop()
+                .amount(109.99D)
+                .orderNo("8180723100966904")
+                .build()
+        );
+
+        tops.stream().forEach(item->{
+            System.out.println(item.getOrderNo());
+        });
+      /*  //打乱顺序
+        tops.parallelStream().forEach(item->{
+            System.out.println(item.getOrderNo());
+        });*/
+
+        tops=tops.parallelStream().sorted(Comparator.comparing(Top::getAmount).reversed()).collect(Collectors.toList());
+
+        tops.stream().forEach(item->{
+            System.out.println(item.getAmount());
+        });
     }
 }
