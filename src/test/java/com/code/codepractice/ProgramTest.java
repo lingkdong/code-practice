@@ -131,9 +131,7 @@ public class ProgramTest {
                 .build()
         );
 
-        tops.stream().forEach(item->{
-            System.out.println(item.getOrderNo());
-        });
+        tops.stream().forEach(item-> System.out.println(item.getOrderNo()));
       /*  //打乱顺序
         tops.parallelStream().forEach(item->{
             System.out.println(item.getOrderNo());
@@ -141,8 +139,10 @@ public class ProgramTest {
 
         tops=tops.parallelStream().sorted(Comparator.comparing(Top::getAmount).reversed()).collect(Collectors.toList());
 
-        tops.stream().forEach(item->{
-            System.out.println(item.getAmount());
-        });
+        tops.stream().forEach(item-> System.out.println(item.getAmount()));
     }
+
+    //overlap
+
+
 }

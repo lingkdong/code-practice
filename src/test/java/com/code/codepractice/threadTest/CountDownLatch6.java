@@ -75,7 +75,7 @@ class Processor implements Runnable{
             e.printStackTrace();
         }
         //Decrements the count of the latch, releasing all waiting threads if  the count reaches zero
-        countDownLatch.countDown();
+        countDownLatch.countDown();//deal one then 减 1
     }
 }
 
