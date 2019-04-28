@@ -62,20 +62,10 @@ public class SynchronizedLockObject4 {
     public void test() {
         long startTime = System.currentTimeMillis();
 
-        Thread thread1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                process();
-            }
-        });
+        Thread thread1 = new Thread(() -> process());
         thread1.start();
 
-        Thread thread2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                process();
-            }
-        });
+        Thread thread2 = new Thread(() -> process());
         thread2.start();
 
         try {
