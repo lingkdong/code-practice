@@ -13,6 +13,8 @@ import java.util.concurrent.Executors;
  * {@link java.util.concurrent.CountDownLatch}
  * A synchronization aid that allows one or more threads to wait until
    a set of operations being performed in other threads completes
+   等待其他线程完成操作
+    如：主线程 等待子线程完成 countDownLatch.await()
  **/
 public class CountDownLatch6 {
     private int N=3;
@@ -68,7 +70,7 @@ class Processor implements Runnable{
     @Override
     public void run() {
         //子线程
-        System.out.println("Started.");
+        System.out.println("sub Thread Started.");
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
