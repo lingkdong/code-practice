@@ -22,10 +22,10 @@ public class StartThread1 {
         Thread thread2=new ThreadByExtends();
         thread2.start();
 
-        Thread thread3=new Thread(new ThreadByExtends());
+        Thread thread3=new Thread(new ThreadByImplement());
         thread3.start();
 
-        Thread thread4=new Thread(new ThreadByExtends());
+        Thread thread4=new Thread(new ThreadByImplement());
         thread4.start();
         // 延迟 test 结束
         delayEnd();
@@ -34,16 +34,13 @@ public class StartThread1 {
     @Test
     public void test2(){
         // anonymous 匿名实现
-        Thread thread=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for(int i=0;i<7;i++){
-                    System.out.println("hello "+i+ " thread :"+Thread.currentThread().getName());
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        Thread thread=new Thread(() -> {
+            for(int i=0;i<7;i++){
+                System.out.println("hello "+i+ " thread :"+Thread.currentThread().getName());
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -69,7 +66,6 @@ class ThreadByExtends extends Thread{
 }
 //2.通过 实现 Runnable
 class ThreadByImplement implements Runnable{
-
     @Override
     public void run() {
         for(int i=0;i<6;i++){
