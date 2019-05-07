@@ -20,6 +20,7 @@ public class CountDownLatch6 {
     private int N=3;
     @Test
     public void test(){
+        System.out.println("main start.");
         CountDownLatch countDownLatch=new CountDownLatch(N);
         ExecutorService executorService= Executors.newFixedThreadPool(N);//主线程
         for(int i=0;i<N;i++){
@@ -35,7 +36,7 @@ public class CountDownLatch6 {
             e.printStackTrace();
         }
 
-        System.out.println("Completed.");
+        System.out.println("main Completed.");
         //运行结果
        /*       Started.//子线程打印
                 Started.//子线程打印
@@ -44,7 +45,8 @@ public class CountDownLatch6 {
                 */
     }
     @Test
-    public void  Driver() throws InterruptedException {
+    public void  test2() throws InterruptedException {
+        System.out.println("main start.");
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(N);
 
@@ -55,7 +57,7 @@ public class CountDownLatch6 {
         startSignal.countDown();      // let all threads proceed
         System.out.println("doSomethingElse2....");// don't let run yet
         doneSignal.await();           // wait for all to finish
-        System.out.println("finished...");
+        System.out.println("main Completed.");
      }
 }
 

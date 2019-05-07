@@ -15,60 +15,50 @@ import java.util.Random;
  **/
 public class SynchronizedLockMethod {
 
-
     private Random random = new Random();
     //定义两个共享变量
     private List<Integer> list1 = new ArrayList<>();
     private List<Integer> list2 = new ArrayList<>();
 
-    public synchronized void stageOne(String threadName) {
+    public synchronized void stageOne() {
 
         try {
             Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        list1.add(random.nextInt(100));
+        list1.add(random.nextInt(10));
 
     }
 
 
-    public synchronized void stageTwo(String threadName) {
+    public synchronized void stageTwo() {
 
         try {
             Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        list2.add(random.nextInt(100));
+        list2.add(random.nextInt(10));
 
     }
 
-    public void process(String threadName) {
-        for (int i = 0; i < 1000; i++) {
-            stageOne(threadName);
-            stageTwo(threadName);
+    public void process() {
+        for (int i = 0; i < 100; i++) {
+            stageOne();
+            stageTwo();
         }
     }
 
     @Test
     public void test() {
+        System.out.println("start...");
         long startTime = System.currentTimeMillis();
 
-        Thread thread1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                process(Thread.currentThread().getName());
-            }
-        });
+        Thread thread1 = new Thread(() -> process());
         thread1.start();
 
-        Thread thread2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                process(Thread.currentThread().getName());
-            }
-        });
+        Thread thread2 = new Thread(() -> process());
         thread2.start();
 
         try {
@@ -80,9 +70,13 @@ public class SynchronizedLockMethod {
 
         System.out.println("time taken:" + (System.currentTimeMillis() - startTime));
         System.out.println("list1 size=" + list1.size() + " list2 size=" + list2.size());
+        System.out.println("end...");
     }
-    //结果
-    //time taken:4042
-    //list1 size=2000 list2 size=2000
-    //time>list1+list2 说明没交错执行 （（程序中已设定 list add 执行一次 sleep 1 millis）
+//    结果
+//    start...
+//    time taken:478
+//    list1 size=200 list2 size=200
+//    end...
+
+//    time>list1+list2 说明没交错执行 （（程序中已设定 list add 执行一次 sleep 1 millis）
 }

@@ -8,6 +8,7 @@ import java.util.Random;
 
 /**
  * 同步代码块 synchronized lockObject
+ *
  * @Author: dongxin
  * @Date: 2019/4/11 14:17
  * 定义两个不同对象锁，可以交替执行 一个线程执行 stageOne 其他线程可执行 stageTwo
@@ -33,7 +34,7 @@ public class SynchronizedLockObject4 {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            list1.add(random.nextInt(100));
+            list1.add(random.nextInt(10));
         }
     }
 
@@ -46,13 +47,13 @@ public class SynchronizedLockObject4 {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            list2.add(random.nextInt(100));
+            list2.add(random.nextInt(10));
         }
 
     }
 
     public void process() {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             stageOne();
             stageTwo();
         }
@@ -60,6 +61,7 @@ public class SynchronizedLockObject4 {
 
     @Test
     public void test() {
+        System.out.println("start...");
         long startTime = System.currentTimeMillis();
 
         Thread thread1 = new Thread(() -> process());
@@ -77,13 +79,14 @@ public class SynchronizedLockObject4 {
 
         System.out.println("time taken:" + (System.currentTimeMillis() - startTime));
         System.out.println("list1 size=" + list1.size() + " list2 size=" + list2.size());
+        System.out.println("end...");
     }
     //结果
-    //time taken:2058 millis
-    //list1 size=2000 list2 size=2000
-
-    ///定义两个不同锁，一个线程执行 stageOne 其他线程可执行 stageTwo
-    //because time <list1+list2（程序中已设定 list add 执行一次 sleep 1 millis）
-
+    //start...
+    //time taken:332
+    //list1 size=200 list2 size=200
+    //end...
+    //time <list1+list2（程序中已设定 list add 执行一次 sleep 1 millis）
+    //说明 thread1和thread2有交错执行
 
 }
