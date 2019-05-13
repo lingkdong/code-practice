@@ -28,7 +28,7 @@ public class WaitAndNotify8 {
         Thread thread1 = new Thread(() -> {
             try {
                 for (int i = 0; i < 30; i++) {
-                    queue.put(random.nextInt(10));
+                    queue.put(random.nextInt(10));//put
                 }
 
             } catch (InterruptedException e) {
@@ -44,7 +44,7 @@ public class WaitAndNotify8 {
             }
             try {
                 while (true) {
-                    queue.take();
+                    queue.take();//take
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -55,7 +55,6 @@ public class WaitAndNotify8 {
         thread2.start();
         thread1.join();//Waits for this thread to die.
         thread2.join();//Waits for this thread to die.
-
 
     }
 
@@ -152,6 +151,8 @@ class BlockQueue<T> {
         }
 
     }
+
+
 }
 
 

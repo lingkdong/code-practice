@@ -25,7 +25,7 @@ public class CallableAndFuture13 {
      * 可以使用 callable 和 future 跟踪执行结果 回写状态数据
      */
     @Test
-    public void test(){
+    public void test() throws InterruptedException {
         ExecutorService executor= Executors.newSingleThreadExecutor();
 
         //anonymous callable
@@ -47,14 +47,13 @@ public class CallableAndFuture13 {
         executor.shutdown();
         try {
             //future.get() Waits if necessary for the computation to complete, and then retrieves its result
-            System.out.println(future.get());//等待完成获取 结果
+            System.out.println("thread result:"+future.get());//等待完成获取 结果
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        //延迟 test结束
-        delayEnd();
+        Thread.sleep(30000);
 
     }
 

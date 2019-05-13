@@ -7,8 +7,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @Author: dongxin
- * @Date: 2019/4/28 19:49
+ * @Author:
+ * @Date:
  * 使用 ReentrantLock 和lock.Condition控制线程执行
  * firstThread start后 lock.await等待
  * 执行 secondThread 执行完后唤醒 firstThread

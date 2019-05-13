@@ -13,31 +13,29 @@ import java.util.concurrent.BlockingQueue;
  **/
 public class ProducerConsumer7 {
 
-    private BlockingQueue queue=new ArrayBlockingQueue(10);
+    private BlockingQueue queue = new ArrayBlockingQueue(10);
 
 
-    private void producer(){
-        Random random=new Random();
-        while (true){
-            Integer item=random.nextInt(100);
-            queue.add(item);//if queue full 10 then wait
-            System.out.println("queue add element:"+item);
+    private void producer() {
+        Random random = new Random();
+        while (true) {
+            Integer item = random.nextInt(100);
+            queue.add(item);//if queue full 10 then throw  IllegalStateException("Queue full")
+            System.out.println("queue add element=" + item +", queue size="+queue.size());
         }
     }
+
     private void consumer() throws InterruptedException {
-        Random random=new Random();
-        while (true){
+        while (true) {
             Thread.sleep(100);
-            if(random.nextInt(10)==0){
-                System.out.println("take queue value="+queue.take());
-            }
+            System.out.println("take queue value=" + queue.take()+", queue size="+queue.size());
         }
     }
 
     @Test
-    public void test(){
-        Thread thread1=new Thread(()-> producer());
-        Thread thread2=new Thread(()-> {
+    public void test() {
+        Thread thread1 = new Thread(() -> producer());
+        Thread thread2 = new Thread(() -> {
             try {
                 consumer();
             } catch (InterruptedException e) {

@@ -78,6 +78,14 @@ public class DeadLock11 {
         thread2.start();
 
         ThreadUtils.delayEnd(30000);
+
+       /* 运行结果
+        thread 1 hold lock1
+        thread 2 hold lock2
+        thread 2 wait for lock1
+        thread 1 wait for lock2
+        */
+
     }
 
 }
