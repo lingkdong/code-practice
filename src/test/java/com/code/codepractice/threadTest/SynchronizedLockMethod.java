@@ -10,7 +10,7 @@ import java.util.Random;
  * 同步方法 synchronized method
  * @Author: dongxin
  * @Date: 2019/4/11 15:50
- * 同一对象的两个同步方法 不能交错进行，当一个线程执行同步方法时，其他线程调用同一个对象的同步方法会暂停执行 直到第一个线程完成
+ * 同一对象的两个同步方法(默认锁this) 不能交错进行，当一个线程执行同步方法时，其他线程调用同一个对象的同步方法会暂停执行 直到第一个线程完成
  * 另外同步方法退出时，会自动与后续调用先发生联系，已保证所有对象可以visiable state更改
  **/
 public class SynchronizedLockMethod {
