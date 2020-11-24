@@ -20,22 +20,7 @@ public class Semaphore12 {
         }
         executorService.shutdown();
         executorService.awaitTermination(1, TimeUnit.DAYS);//等待结束
-      /* 运行结果
-      pool-1-thread-1: connections ,availablePermits=2
-       pool-1-thread-1: working
-       pool-1-thread-3: connections ,availablePermits=1
-       pool-1-thread-3: working
-       pool-1-thread-4: connections ,availablePermits=0
-       pool-1-thread-4: working
-       pool-1-thread-5: connections ,availablePermits=2
-       pool-1-thread-2: connections ,availablePermits=0
-       pool-1-thread-7: connections ,availablePermits=1
-       pool-1-thread-2: working
-       pool-1-thread-5: working
-       pool-1-thread-7: working
-       pool-1-thread-6: connections ,availablePermits=1
-       pool-1-thread-6: working
-       */
+
     }
 }
 
@@ -55,17 +40,15 @@ class Connection12 {
     public void connect() {
         try {
             semaphore.acquire();//获取许可
-
             System.out.println(String.format("%s: connections ,availablePermits=%s ",
                     Thread.currentThread().getName(), semaphore.availablePermits()));//availablePermits 信号量中可用许可数
             //fk job
             System.out.println(String.format("%s: working", Thread.currentThread().getName()));
             Thread.sleep(2000);
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            semaphore.release();//释放
+            semaphore.release();//释放许可
         }
     }
 }

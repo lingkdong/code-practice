@@ -1,4 +1,4 @@
-package com.code.codepractice.algorithm;
+package com.code.codepractice.algorithm.stack;
 
 import java.util.LinkedList;
 import java.util.Queue;

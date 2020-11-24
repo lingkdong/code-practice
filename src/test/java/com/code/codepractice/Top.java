@@ -1,14 +1,24 @@
 package com.code.codepractice;
+import lombok.Data;
+import com.code.codepractice.dto.Student;
+
+import java.util.List;
 
 /**
  * @Author: dongxin
  * @Date: 2019/4/17 15:01
  **/
+@Data
 public class Top {
-    private Double amount;
+    private List<Student> students;
+     private Double amount;
     private String orderNo;
 
+    public Top() {
+    }
+
     private Top(Builder builder) {
+        this.students = builder.students;
         this.amount = builder.amount;
         this.orderNo = builder.orderNo;
     }
@@ -17,23 +27,8 @@ public class Top {
         return new Builder();
     }
 
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public String getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
-    }
-
     public static final class Builder {
+        private List<Student> students;
         private Double amount;
         private String orderNo;
 
@@ -42,6 +37,11 @@ public class Top {
 
         public Top build() {
             return new Top(this);
+        }
+
+        public Builder students(List<Student> students) {
+            this.students = students;
+            return this;
         }
 
         public Builder amount(Double amount) {
@@ -54,4 +54,6 @@ public class Top {
             return this;
         }
     }
+
+
 }

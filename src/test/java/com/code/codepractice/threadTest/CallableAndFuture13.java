@@ -47,11 +47,13 @@ public class CallableAndFuture13 {
         executor.shutdown();
         try {
             //future.get() Waits if necessary for the computation to complete, and then retrieves its result
-            System.out.println("thread result:"+future.get());//等待完成获取 结果
+            System.out.println("thread result:"+future.get(2,TimeUnit.SECONDS));//等待完成获取 结果
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
+        } catch (TimeoutException e) {
+            future.cancel(true);
         }
         Thread.sleep(30000);
 

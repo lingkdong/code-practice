@@ -26,7 +26,7 @@ public class UsingCyclicBarrier {
     @Test
     // todo not finished
     public void test() throws InterruptedException {
-        int parties=10;
+        int parties=10;// the number of threads that must invoke
         Runnable barrierAction= () -> System.out.println("well done guys.");
         CyclicBarrier cyclicBarrier=new CyclicBarrier(parties,barrierAction);
         Random random=new Random();
@@ -38,7 +38,7 @@ public class UsingCyclicBarrier {
                 System.out.println("done for "+Thread.currentThread().getName());
                 cyclicBarrier.wait();//等待
             } catch (InterruptedException e) {
-                e.printStackTrace();
+              return;
             }
 
         };
