@@ -1,10 +1,15 @@
 package com.code.codepractice.classTest;
 
-public class MyClass {
+import java.io.Serializable;
+
+public class MyClass implements Cloneable, Serializable {
+    public static final String MY_CLASS="MY_CLASS";
+    private static final long serialVersionUID=1l;
+
     private String name;
     private String className;
 
-    public MyClass(String name) {
+    private MyClass(String name) {
         this.name = name;
     }
 
@@ -31,6 +36,10 @@ public class MyClass {
     public void setClassName(String className) {
         this.className = className;
     }
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 
     @Override
     public String toString() {
@@ -38,5 +47,8 @@ public class MyClass {
                 "name='" + name + '\'' +
                 ", className='" + className + '\'' +
                 '}';
+    }
+    public void doMyClass(){
+        System.out.println("do some work...");
     }
 }
