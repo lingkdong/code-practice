@@ -4,13 +4,16 @@ import com.alibaba.fastjson.JSONObject;
 import com.code.codepractice.dto.Emplyee;
 import com.code.codepractice.dto.Person;
 import com.code.codepractice.dto.Student;
+import com.google.common.base.Splitter;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.text.Collator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -376,4 +379,65 @@ public class ProgramTest {
 
     }
 
+    /**
+     * 权重算法
+     */
+    @Test
+    public void weight(){
+        Map map=new HashMap();
+        map.put("127.0.0.1:80",10);//[0,10)
+        map.put("127.0.0.1:81",20);//[10,30)
+        map.put("127.0.0.1:86",35);//[30,65)
+        map.put("127.0.0.1:87",40);//[65,105)
+
+        //权重排序
+        List<Map.Entry<String,Integer>> arrayList=new ArrayList<>(map.entrySet());
+        arrayList.sort(Comparator.comparingInt(Map.Entry::getValue));
+
+        Map<String,Integer[]> rangMap=new HashMap();
+        final Integer[] totalWeight = {0};
+        arrayList.stream().forEach(item->{
+            rangMap.put(item.getKey(),new Integer[]{totalWeight[0], totalWeight[0] +=item.getValue()});
+            System.out.println(totalWeight[0]);
+        });
+
+        for(int i=0;i<100;i++){
+            getWeight(totalWeight[0]-1,rangMap);
+        }
+    }
+
+    private void  getWeight(Integer totalWeight,Map<String,Integer[]> rangMap){
+        Integer randomV=RandomUtils.nextInt(0,totalWeight);
+
+        for(Map.Entry<String,Integer[]> item:rangMap.entrySet()){
+            if(randomV>=item.getValue()[0] && randomV<item.getValue()[1]){
+                System.out.println("randmValue="+randomV+",ip="+item.getKey());
+                return;
+            }
+        }
+        System.out.println(" no found");
+    }
+
+    @Test
+    public void testBetween() throws UnsupportedEncodingException {
+        String test="a1,b2,cc3";
+      /*  System.out.println(StringUtils.substringBetween(test,"a","b"));
+        System.out.println(StringUtils.substringBetween(test,"b","c"));
+        System.out.println(StringUtils.substringAfter(test,"c"));
+        System.out.println(StringUtils.substringAfterLast(test,"c"));
+
+
+        String dateStr = "20201112131106";
+        System.out.println(dateStr);
+        System.out.println(dateStr.substring(0,8));
+        System.out.println(dateStr.substring(8));*/
+
+
+        System.out.println(StringUtils.left(test,4000));
+        System.out.println(StringUtils.left(null,4000));
+
+        List str= Splitter.on("thmx").splitToList("2|thmx|m|11");
+        System.out.println(str.size());
+
+    }
 }

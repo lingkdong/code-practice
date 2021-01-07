@@ -6,6 +6,7 @@ package com.code.codepractice.algorithm.queue;
  * Question5:用数组实现队列
  * queue:队列先进先出 ，
  * add remove peek
+ * https://www.cs.usfca.edu/~galles/visualization/QueueLL.html
  **/
 public class QueueByArray5 {
     private int[] value;//存放值

@@ -5,6 +5,7 @@ package com.code.codepractice.algorithm.queue;
  * @Date: 2019/11/18 16:57
  * Question6:使用链表实现队列；
  * add ,remove,peek
+ * https://www.cs.usfca.edu/~galles/visualization/QueueLL.html
  **/
 public class QueueByLinkList6 {
     private Node first;//首部，首部先移除

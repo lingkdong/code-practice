@@ -5,6 +5,7 @@ package com.code.codepractice.algorithm.stack;
  * @Date: 2019/11/15 15:29
  * Question2:使用链表实现堆栈
  * push,pop,peek
+ *https://www.cs.usfca.edu/~galles/visualization/StackLL.html
  **/
 public class StackByLinkList2 {
     private Node head;//

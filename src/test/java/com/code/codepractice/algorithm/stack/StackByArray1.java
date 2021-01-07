@@ -5,6 +5,7 @@ package com.code.codepractice.algorithm.stack;
  * @Date: 2019/11/15 14:40
  * Question1:使用数据实现堆栈
  * push,pop,peek
+ * https://www.cs.usfca.edu/~galles/visualization/StackArray.html
  **/
 public class StackByArray1 {
     private int[] value;
