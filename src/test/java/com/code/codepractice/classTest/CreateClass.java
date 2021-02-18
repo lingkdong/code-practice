@@ -31,7 +31,7 @@ import java.util.Properties;
  * 反射可以节约编码 解耦， 程序配置性提高,也可以在程序运行中操作对象
  * {@link java.lang.reflect}
  */
-public class ClassTestDemo {
+public class CreateClass {
     /**
      * new 创建类
      */
@@ -275,7 +275,7 @@ public class ClassTestDemo {
      */
     @Test
     public void executeMethodByConfig(){
-        try(InputStream inputStream=ClassTestDemo.class.getClassLoader().getResourceAsStream("application.properties")) {
+        try(InputStream inputStream= CreateClass.class.getClassLoader().getResourceAsStream("application.properties")) {
             Properties properties=new Properties();
             properties.load(inputStream);
            String className= (String) properties.get("className");
@@ -295,5 +295,73 @@ public class ClassTestDemo {
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void testClassLoader(){
+        MyClass obj=new MyClass();
+        System.out.println(obj.getClass().getClassLoader());//application classLoader
+        System.out.println(obj.getClass().getClassLoader().getParent());//Extension classLoader
+        System.out.println(obj.getClass().getClassLoader().getParent().getParent());
+        //-Xmn1m -Xms:1m -XX:+PrintCommandLineFlags -XX:+PrintGCDetails -XX:+HeapDumpOnOutOfMemoryError//成dump文件
+        //-XX:+PrintCommandLineFlags
+        System.out.println(Runtime.getRuntime().maxMemory()/(1024*1024));
+        System.out.println(Runtime.getRuntime().totalMemory()/(1024*1024));
+        String test=new String();
+        while (true){
+            //自我复制 快速失败
+            test+=test+"this is test OutOfMemoryError.";
+        }
+    }
+
+    @Test
+    public void testJclasslib(){
+        Integer num=new Integer(3);
+        //使用 Jclasslib 查看源码
+        /**
+         * 0 new #103 <java/lang/Integer>
+         * 3 dup
+         * 4 iconst_3
+         * 5 invokespecial #104 <java/lang/Integer.<init>>
+         * 8 astore_1
+         * 9 return
+         *
+         * 第一步 先在堆中创建一个 Integer对象
+         * 第二步 dup 复制最高操作数栈到栈顶  就是复制 刚才创建的
+         *            Integer 对象 到栈中 准备后续操作
+         * 第三步 将 int 3 push 入操作数栈
+         * 第四部 调用实例化方法<<init> : (I)V> ，次处为 public Integer(int value) 构造函数 将3 赋值给#103 ，该方法得到父类及其继承属性
+         * 第五步 数据指向 引用num
+         * 第六步 返回
+         */
+
+    }
+    @Test
+    public void testJclasslib2(){
+        Integer num2=null;
+        /**
+         * 0 aconst_null
+         * 1 astore_1
+         * 2 return
+         * 第一步 将null push入操作数栈
+         * 第二步 将 null指向引用 num2
+         * 第三步 返回
+         */
+
+    }
+    @Test
+    public void testJclasslib3(){
+        Integer num3=1;
+        /**
+         * 0 iconst_1
+         * 1 invokestatic #105 <java/lang/Integer.valueOf>
+         * 4 astore_1
+         * 5 return
+         * 第一步 将1 push入操作数栈
+         * 第二步 调用静态方法 public static Integer valueOf（） 将 1 赋值给 对象
+         * 第三步 对象 指向引用 num3
+         * 第四步 返回
+         */
+
     }
 }
