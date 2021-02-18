@@ -35,15 +35,21 @@ public class JolTest {
         System.out.println(ClassLayout.parseClass(object.getClass()).toPrintable());
         System.out.println("....................................");
         System.out.println(ClassLayout.parseInstance(object).toPrintable());
+        //加锁 mark word有变化
+        //mark word 有三个信息 1.锁信息 2.GC 3.identity hashcode
+        synchronized (object){
+            System.out.println("....................................");
+            System.out.println(ClassLayout.parseInstance(object).toPrintable());
+        }
 
-        System.out.println("....................................");
-        TestClass object2=new TestClass();
-        System.out.println(ClassLayout.parseInstance(object2).toPrintable());
-
-        System.out.println("....................................");
-        TestClass object3=new TestClass();
-        object3.add(11);
-        System.out.println(ClassLayout.parseInstance(object3).toPrintable());
+//        System.out.println("....................................");
+//        TestClass object2=new TestClass();
+//        System.out.println(ClassLayout.parseInstance(object2).toPrintable());
+//
+//        System.out.println("....................................");
+//        TestClass object3=new TestClass();
+//        object3.add(11);
+//        System.out.println(ClassLayout.parseInstance(object3).toPrintable());
 
 
 
