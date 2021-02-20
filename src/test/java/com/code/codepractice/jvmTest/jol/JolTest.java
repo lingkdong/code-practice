@@ -14,7 +14,7 @@ import org.openjdk.jol.info.ClassLayout;
  *      12     4        (loss due to the next object alignment)
  * Instance size: 16 bytes
  * Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
- * mark word 四个字节
+ * mark word 8个字节
  * 一个对象 初始化是 16个字节
  * jvm 第二版中
  * 存储内容                        标志位               状态
@@ -26,21 +26,38 @@ import org.openjdk.jol.info.ClassLayout;
  *   对象分代年龄
  *
  * https://www.jianshu.com/p/993628f0f4bd
+ *
+ * 源码 markWord.hpp
+ *
+ *  //    [JavaThread* | epoch | age | 1 | 01]       lock is biased toward given thread
+ * //    [0           | epoch | age | 1 | 01]       lock is anonymously biased
+ * //
+ * //  - the two lock bits are used to describe three states: locked/unlocked and monitor.
+ * //
+ * //    [ptr             | 00]  locked             ptr points to real header on stack
+ * //    [header      | 0 | 01]  unlocked           regular object header
+ * //    [ptr             | 10]  monitor            inflated lock (header is wapped out) 膨胀锁
+ * //    [ptr             | 11]  marked             used to mark an object
+ * //    [0 ............ 0| 00]  inflating          inflation in progress
  */
 public class JolTest {
 
     @Test
     public void testPrint(){
         Object object=new Object();
-        System.out.println(ClassLayout.parseClass(object.getClass()).toPrintable());
-        System.out.println("....................................");
         System.out.println(ClassLayout.parseInstance(object).toPrintable());
         //加锁 mark word有变化
         //mark word 有三个信息 1.锁信息 2.GC 3.identity hashcode
         synchronized (object){
             System.out.println("....................................");
             System.out.println(ClassLayout.parseInstance(object).toPrintable());
+
         }
+
+        object.hashCode();
+        System.out.println("....................................");
+        System.out.println(ClassLayout.parseInstance(object).toPrintable());
+
 
 //        System.out.println("....................................");
 //        TestClass object2=new TestClass();

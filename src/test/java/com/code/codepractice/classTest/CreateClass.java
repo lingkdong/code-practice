@@ -316,7 +316,7 @@ public class CreateClass {
 
     @Test
     public void testJclasslib(){
-        Integer num=new Integer(3);
+        Integer num=new Integer(11);
         //使用 Jclasslib 查看源码
         /**
          * 0 new #103 <java/lang/Integer>
@@ -351,7 +351,7 @@ public class CreateClass {
     }
     @Test
     public void testJclasslib3(){
-        Integer num3=1;
+        Integer num3=3;
         /**
          * 0 iconst_1
          * 1 invokestatic #105 <java/lang/Integer.valueOf>
