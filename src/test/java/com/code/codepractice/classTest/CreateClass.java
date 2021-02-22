@@ -1,5 +1,6 @@
 package com.code.codepractice.classTest;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 
 import java.io.*;
@@ -314,6 +315,16 @@ public class CreateClass {
         }
     }
 
+    /**
+     * 1) invokestatic：调用静态方法，解析阶段确定唯一方法版本。
+     *         2) invokespecial：调用<init>方法、私有及父类方法，解析阶段确定唯一方法版本。
+     *         3) invokevirtual：调用所有虚方法。
+     *         4) invokeinterface：调用接口方法。
+     *
+     * 动态调用指令：
+     *
+     * 5) invokedynamic：动态解析出需要调用的方法，然后执行
+     */
     @Test
     public void testJclasslib(){
         Integer num=new Integer(11);
@@ -363,5 +374,21 @@ public class CreateClass {
          * 第四步 返回
          */
 
+    }
+    @Test
+    public void testJclasslib4(){
+        Integer num4=getRandam();
+        /**
+         * 0 aload_0
+         * 1 invokevirtual #106 <com/code/codepractice/classTest/CreateClass.getRandam>
+         * 4 astore_1
+         * 5 return
+         *
+         * invokevirtual 调用虚方法
+         */
+    }
+
+    public Integer getRandam(){
+        return RandomUtils.nextInt(1,100000);
     }
 }
