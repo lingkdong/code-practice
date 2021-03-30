@@ -1,4 +1,4 @@
-package com.code.codepractice.netty.client;
+package com.code.codepractice.io.netty.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

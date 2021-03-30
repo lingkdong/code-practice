@@ -1,7 +1,7 @@
-package com.code.codepractice.netty;
+package com.code.codepractice.io.netty;
 
-import com.code.codepractice.netty.client.NettyClient;
-import com.code.codepractice.netty.server.NettyServer;
+import com.code.codepractice.io.netty.client.NettyClient;
+import com.code.codepractice.io.netty.server.NettyServer;
 import org.junit.Test;
 
 import java.net.InetSocketAddress;
