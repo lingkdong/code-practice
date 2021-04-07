@@ -59,6 +59,34 @@ public class Server {
 
     /**
      * 引入多路复用器的版本
+     * Selector.open()->SelectorProvider.provider()->sun.nio.ch.DefaultSelectorProvider.get()->  EPollSelectorImpl(SelectorProvider sp)-> EPoll.create()->EPoll_create EPoll.c文件中->epoll_create1(EPOLL_CLOEXEC)
+     * man epoll_create1
+     * 在线文档见 https://www.kernel.org/doc/man-pages/
+     * https://man7.org/linux/man-pages/man2/epoll_create1.2.html
+     *
+     *
+     * serverSocketChannel.register->SelectableChannel.register(Selector sel, int ops)->register(Selector sel, int ops, Object att)
+     * ->AbstractSelectableChannel.register->AbstractSelector.register->SelectorImpl.register(AbstractSelectableChannel var1, int var2, Object var3)->implRegister（如果选择器没关闭）
+     * ->SelectionKeyImpl.interestOps: ops getAndSet VarHandle INTERESTOPS 句柄集合
+     * ops :SelectionKey.OP_ACCEPT, SelectionKey.OP_READ, SelectionKey.OP_CONNECT, SelectionKey.OP_WRITE
+     * ->集合中不存在 则注册事件 selector.setEventOps(this)->SelectorImpl.setEventOps->EPollSelectorImpl.setEventOps
+     *
+     *
+     * selector.select()->SelectorImpl.select()->select(0)->lockAndDoSelect()->doSelect(long var1)
+     * ->EPollSelectorImpl.doSelect(Consumer<SelectionKey> action, long timeout)->
+     *     EPoll.ctl->epoll_ctl
+     *       epoll_ctl 添加 删除或 修改 fd监听事件
+     *        opcodes
+     *        static final int EPOLL_CTL_ADD  = 1;
+     *        static final int EPOLL_CTL_DEL  = 2;
+     *        static final int EPOLL_CTL_MOD  = 3;
+     *          man epoll_ctl
+     *    https://man7.org/linux/man-pages/man2/epoll_ctl.2.html
+     *
+     *     EPoll.wait->epoll_wait
+     *      man epoll_wait
+     *      等待IO事件，timeout=-1 block 阻塞,timeout=0  return immediately 立即返回结果
+     *      https://man7.org/linux/man-pages/man2/epoll_wait.2.html
      */
     @Test
     public void test2() {
