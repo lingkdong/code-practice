@@ -75,17 +75,28 @@ public class Server {
      * selector.select()->SelectorImpl.select()->select(0)->lockAndDoSelect()->doSelect(long var1)
      * ->EPollSelectorImpl.doSelect(Consumer<SelectionKey> action, long timeout)->
      *     EPoll.ctl->epoll_ctl
+     *
+     *       int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);
+     *
      *       epoll_ctl 添加 删除或 修改 fd监听事件
      *        opcodes
      *        static final int EPOLL_CTL_ADD  = 1;
      *        static final int EPOLL_CTL_DEL  = 2;
      *        static final int EPOLL_CTL_MOD  = 3;
      *          man epoll_ctl
+     *           EPOLL_CTL_ADD
+     *                 Register the target file descriptor fd on the epoll instance referred to by the file descriptor epfd and associate the event event with  the  internal  file
+     *                 linked to fd.
+     *                 1.将目标fd注册到epfd，2将事件与fd关联
      *    https://man7.org/linux/man-pages/man2/epoll_ctl.2.html
      *
      *     EPoll.wait->epoll_wait
+     *
+     *      int epoll_wait(int epfd, struct epoll_event *events,
+     *                       int maxevents, int timeout);
+     *
      *      man epoll_wait
-     *      等待IO事件，timeout=-1 block 阻塞,timeout=0  return immediately 立即返回结果
+     *      等待epfd中的事件，timeout=-1 block 阻塞,timeout=0  return immediately 立即返回结果
      *      https://man7.org/linux/man-pages/man2/epoll_wait.2.html
      */
     @Test
