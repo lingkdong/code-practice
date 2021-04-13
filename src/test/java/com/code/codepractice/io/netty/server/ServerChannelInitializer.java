@@ -23,7 +23,7 @@ public class ServerChannelInitializer extends ChannelInitializer<Channel> {
         //自定义handler
         pipeline.addLast("decoder", new StringDecoder());
         pipeline.addLast("encoder", new StringEncoder());
-        pipeline.addLast(new NettyServerHandler());
+        pipeline.addLast(new NettyServerHandler());//pipeline添加handler处理器
 
     }
 }

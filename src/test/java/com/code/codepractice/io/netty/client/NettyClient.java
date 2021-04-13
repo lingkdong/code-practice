@@ -9,6 +9,8 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
+import java.util.Scanner;
+
 @Slf4j
 public class NettyClient {
     public void start(InetSocketAddress socketAddress){
@@ -22,6 +24,10 @@ public class NettyClient {
             ChannelFuture future=bootstrap.connect(socketAddress).sync();
             log.info("client connect success");
             future.channel().writeAndFlush("hello,this is client test send");
+          /*  Scanner scanner=new Scanner(System.in);//扫描输入
+            while (scanner.hasNextLine()){
+                future.channel().writeAndFlush(scanner.nextLine());
+            }*/
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();

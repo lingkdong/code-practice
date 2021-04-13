@@ -64,6 +64,9 @@ public class Server {
      * 在线文档见 https://www.kernel.org/doc/man-pages/
      * https://man7.org/linux/man-pages/man2/epoll_create1.2.html
      *
+     *bind->ServerSocketChannel.bind->ServerSocketChannelImpl.bind->unixBind->UnixDomainSockets.bind->UnixDomainSockets.bind0
+     * ->UnixDomainSockets_bind0-> bind(fdval(env, fdo), (struct sockaddr *)&sa, sa_len);
+     * man  bind
      *
      * serverSocketChannel.register->SelectableChannel.register(Selector sel, int ops)->register(Selector sel, int ops, Object att)
      * ->AbstractSelectableChannel.register->AbstractSelector.register->SelectorImpl.register(AbstractSelectableChannel var1, int var2, Object var3)->implRegister（如果选择器没关闭）

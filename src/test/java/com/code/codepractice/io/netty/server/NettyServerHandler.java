@@ -11,7 +11,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        log.info("netty server Channel active......");
+        log.info("客户端{}连接服务器......",ctx.channel().localAddress());
     }
 
     /**
@@ -19,7 +19,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        log.info("netty server get msg: {}", msg.toString());
+        log.info("netty server get {} msg: {}",ctx.channel().localAddress(), msg.toString());
         ctx.write("thx,i got it");
         ctx.flush();
     }
