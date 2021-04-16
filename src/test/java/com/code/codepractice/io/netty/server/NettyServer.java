@@ -65,6 +65,14 @@ import java.net.InetSocketAddress;
  *  ->byteBuf.writeBytes数据写到缓存区->pipeline.fireChannelRead(byteBuf)->ChannelPipeline.fireChannelRead 回调pipeline
  *  -> ((ChannelInboundHandler) handler()).channelRead->NettyServerHandler.channelRead调用自定义的 channelRead
  *  pipeline 职责链模式 next.invokeChannelRead
+ *
+ *  6.0拷贝
+ *  AbstractNioByteChannel.read->allocHandle.allocate->DefaultMaxMessagesRecvByteBufAllocator.allocate
+ *  ->ByteBufAllocator.ioBuffer->AbstractByteBufAllocator.ioBuffer->directBuffer(int initialCapacity)
+ *  ->directBuffer(int initialCapacity, int maxCapacity)->PooledByteBufAllocator.newDirectBuffer
+ *  ->PoolArena.allocate-> allocate(PoolThreadCache cache, PooledByteBuf<T> buf, final int reqCapacity)
+ *  ->tcacheAllocateSmall->PoolThreadCache.allocateSmall->allocate->initBuf->PoolChunk.initBufWithSubpage
+ *  ->PooledByteBuf.init->init0
  */
 @Slf4j
 public class NettyServer {
@@ -104,4 +112,5 @@ public class NettyServer {
         System.out.println(PlatformDependent.javaVersion());
         System.out.println(System.getProperty("java.specification.version"));//获取jdk版本
     }
+
 }
