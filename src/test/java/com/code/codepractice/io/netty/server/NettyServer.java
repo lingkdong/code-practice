@@ -91,6 +91,7 @@ public class NettyServer {
                 .option(ChannelOption.SO_BACKLOG,1024)//设置队列大小
                 .childOption(ChannelOption.SO_KEEPALIVE,true);
         try {
+            //异步绑定服务器 sync 等待绑定完成
             ChannelFuture future=bootstrap.bind(socketAddress).sync();
             log.info("netty server start,port:{}",socketAddress.toString());
             future.channel().closeFuture().sync();

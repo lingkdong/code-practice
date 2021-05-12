@@ -7,13 +7,10 @@ import com.code.codepractice.dto.Student;
 import com.code.codepractice.threadTest2.HiddenIterator;
 import com.google.common.base.Splitter;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -362,6 +359,10 @@ public class ProgramTest {
 
         List str= Splitter.on("thmx").splitToList("2|thmx|m|11");
         System.out.println(str.size());
+
+        List<Integer> tests=Arrays.asList(1,7,3,9);
+        tests=tests.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        System.out.println(JSONObject.toJSONString(tests));
 
     }
 

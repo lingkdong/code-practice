@@ -9,6 +9,7 @@ import io.netty.handler.codec.string.StringEncoder;
 public class ServerChannelInitializer extends ChannelInitializer<Channel> {
     @Override
     protected void initChannel(Channel channel) throws Exception {
+        //pipeline :intercepting filter 管道
         ChannelPipeline pipeline=channel.pipeline();
        /* pipeline.addLast(new HttpServerCodec());//netty http编码和解码器
         pipeline.addLast(new ChunkedWriteHandler());//大文件分区传输
